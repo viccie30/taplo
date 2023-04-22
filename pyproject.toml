@@ -6,6 +6,7 @@ build-backend = "maturin"
 
 [project]
 name = "taplo"
+requires-python = ">=3.7"
 authors = [{ name = "Ferenc Tamás" }]
 maintainers = [{ name = "Victor Westerhuis", email = "victor@westerhu.is" }]
 classifiers = [
