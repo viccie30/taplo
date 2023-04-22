@@ -35,7 +35,15 @@ include = [{ path = "LICENSE.md", format = "sdist" }]
 
 [tool.cibuildwheel]
 build-frontend = "build"
+archs = "all"
 
 [tool.cibuildwheel.linux]
 environment = { PATH = "$HOME/.cargo/bin:$PATH" }
-before-all = "curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal"
+
+[[tool.cibuildwheel.overrides]]
+select = "*-musllinux_*"
+before-all = "curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal || apk update && apk add cargo"
+
+[[tool.cibuildwheel.overrides]]
+select = "*-manylinux_*"
+before-all = "curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal || yum install -y cargo"
