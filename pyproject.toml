@@ -1,0 +1,40 @@
+[build-system]
+requires = [
+    "maturin @ git+https://github.com/PyO3/maturin.git@5d5b96a9974eac26b8cdf601cd2faf64f4999de9",
+]
+build-backend = "maturin"
+
+[project]
+name = "taplo"
+authors = [{ name = "Ferenc Tamás" }]
+maintainers = [{ name = "Victor Westerhuis", email = "victor@westerhu.is" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Rust",
+]
+readme = { text = """
+# Taplo, a TOML v1.0.0 toolkit, for Python
+
+> This project is not affiliated with the upstream developer of Taplo \
+in any way, shape, or form.
+
+A command line tool for linting and formatting TOML files, written in \
+Rust. This project makes it easier to use in Python projects.
+
+More information on the [website](https://taplo.tamasfe.dev/cli)
+""", content-type = "text/markdown; charset=UTF-8; variant=GFM" }
+dynamic = ["description", "keywords", "license", "version"]
+
+[tool.maturin]
+bindings = "bin"
+manifest-path = "crates/taplo-cli/Cargo.toml"
+include = [{ path = "LICENSE.md", format = "sdist" }]
+
+[tool.cibuildwheel]
+build-frontend = "build"
+
+[tool.cibuildwheel.linux]
+environment = { PATH = "$HOME/.cargo/bin:$PATH" }
+before-all = "curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal"
