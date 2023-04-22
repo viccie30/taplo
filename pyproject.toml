@@ -40,6 +40,9 @@ archs = "all"
 [tool.cibuildwheel.linux]
 environment = { PATH = "$HOME/.cargo/bin:$PATH" }
 
+[tool.cibuildwheel.macos]
+before-all = "rustup target add aarch64-apple-darwin x86_64-apple-darwin"
+
 [[tool.cibuildwheel.overrides]]
 select = "*-musllinux_*"
 before-all = "curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal || apk update && apk add cargo"
