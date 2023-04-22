@@ -41,7 +41,12 @@ archs = "all"
 environment = { PATH = "$HOME/.cargo/bin:$PATH" }
 
 [tool.cibuildwheel.macos]
-before-all = "rustup target add aarch64-apple-darwin x86_64-apple-darwin"
+before-all = "rustup target add aarch64-apple-darwin"
+environment = { MATURIN_SETUP_ARGS = "--target=x86_64-apple-darwin" }
+
+[tool.cibuildwheel.windows]
+before-all = "rustup target add i686-pc-windows-msvc aarch64-pc-windows-msvc"
+environment = { MATURIN_SETUP_ARGS = "--target=x86_64-pc-windows-msvc" }
 
 [[tool.cibuildwheel.overrides]]
 select = "*-musllinux_*"
