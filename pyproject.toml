@@ -36,6 +36,7 @@ include = [{ path = "LICENSE.md", format = "sdist" }]
 [tool.cibuildwheel]
 build-frontend = "build"
 archs = "all"
+build = "cp311-*"
 
 [tool.cibuildwheel.linux]
 environment = { PATH = "$HOME/.cargo/bin:$PATH" }
@@ -47,6 +48,7 @@ environment = { MATURIN_SETUP_ARGS = "--target=x86_64-apple-darwin" }
 [tool.cibuildwheel.windows]
 before-all = "rustup target add i686-pc-windows-msvc aarch64-pc-windows-msvc"
 environment = { MATURIN_SETUP_ARGS = "--target=x86_64-pc-windows-msvc" }
+skip = "*_arm64"
 
 [[tool.cibuildwheel.overrides]]
 select = "*-musllinux_*"
